@@ -38,6 +38,7 @@ loveframes.resizeobject = false
 loveframes.dragobject = false
 loveframes.hover = false
 loveframes.input_cursor_set = false
+loveframes.cursor = love.mouse.getSystemCursor("arrow")
 loveframes.prevcursor = nil
 loveframes.basicfont = love.graphics.newFont(12)
 loveframes.basicfontsmall = love.graphics.newFont(10)
@@ -90,7 +91,7 @@ function loveframes.update(dt)
 	
 	if loveframes.config["ENABLE_SYSTEM_CURSORS"] then 
 		local hoverobject = loveframes.hoverobject
-		local arrow = love.mouse.getSystemCursor("arrow")
+		local cursor = loveframes.cursor
 		local curcursor = love.mouse.getCursor()
 		if hoverobject then
 			local ibeam = love.mouse.getSystemCursor("ibeam")
@@ -143,9 +144,9 @@ function loveframes.update(dt)
 						end
 					else
 						if not loveframes.resizeobject then
-							local arrow = love.mouse.getSystemCursor("arrow")
-							if curcursor ~= arrow then
-								love.mouse.setCursor(arrow)
+							local cursor = loveframes.cursor
+							if curcursor ~= cursor then
+								love.mouse.setCursor(cursor)
 							end
 						end
 					end
@@ -156,16 +157,16 @@ function loveframes.update(dt)
 					love.mouse.setCursor(hand)
 				end
 			end
-			if curcursor ~= arrow then
+			if curcursor ~= cursor then
 				if hoverobject.type ~= "textinput" and hoverobject.type ~= "frame" and not hoverobject.linkcol and not loveframes.resizeobject then
-					love.mouse.setCursor(arrow)
+					love.mouse.setCursor(cursor)
 				elseif hoverobject.type ~= "textinput" and curcursor == ibeam then
-					love.mouse.setCursor(arrow)
+					love.mouse.setCursor(cursor)
 				end
 			end
 		else
-			if curcursor ~= arrow and not loveframes.resizeobject then
-				love.mouse.setCursor(arrow)
+			if curcursor ~= cursor and not loveframes.resizeobject then
+				love.mouse.setCursor(cursor)
 			end
 		end
 	end
@@ -422,6 +423,30 @@ function loveframes.GetState()
 
 	return loveframes.state
 	
+end
+
+--[[---------------------------------------------------------
+	- func: SetCursor()
+	- desc: sets the current cursor
+--]]---------------------------------------------------------
+function loveframes.SetCursor(curs)
+
+	if curs == nil then
+		loveframes.cursor = love.mouse.getSystemCursor("arrow")
+	else
+		loveframes.cursor= curs
+	end
+
+end
+
+--[[---------------------------------------------------------
+	- func: GetCursor()
+	- desc: gets the current cursor
+--]]---------------------------------------------------------
+function loveframes.GetCursor()
+
+	return loveframes.cursor
+
 end
 
 -- create a list of gui objects, skins and templates
