@@ -439,16 +439,6 @@ function loveframes.SetCursor(curs)
 
 end
 
---[[---------------------------------------------------------
-	- func: GetCursor()
-	- desc: gets the current cursor
---]]---------------------------------------------------------
-function loveframes.GetCursor()
-
-	return loveframes.cursor
-
-end
-
 -- create a list of gui objects, skins and templates
 local objects = loveframes.util.GetDirectoryContents(dir .. "/objects")
 local skins = loveframes.util.GetDirectoryContents(dir .. "/skins")
